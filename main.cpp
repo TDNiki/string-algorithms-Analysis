@@ -22,7 +22,7 @@ int main(void)
     const long nTextMax = 10e7;
     const char nTest = 100;
     const int firstSymbol_ANSI = 97; // ANSI start index
-    const int sigma = 26; // кол-во уникальных символов 26
+    const int sigma = 2; // кол-во уникальных символов 26
     const long nPattern = 10;
     const long nPatternMax = 10e2;
     //const double q = 0.001; 
