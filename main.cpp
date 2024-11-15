@@ -24,7 +24,7 @@ int main(void)
     const int firstSymbol_ANSI = 97; // ANSI start index
     const int sigma = 2; // кол-во уникальных символов 26
     const long nPattern = 10;
-    const long nPatternMax = 10e2;
+    const long nPatternMax = 10e5;
     //const double q = 0.001; 
 
     const long nText = 1000000;
@@ -34,17 +34,18 @@ int main(void)
 		
 		
 		
-		//std::cout << text << std::endl;
+		//std::cout << text << std::endl;// DEBUG
         long shift = rand() % (nText - sizePattern + 1);
-        ///std::cout << shift << std::endl;
+        ///std::cout << shift << std::endl; // DEBUG
         std::string pattern = text.substr(shift, sizePattern);
-        //std::cout << pattern << std::endl;
+        //std::cout << pattern << std::endl; // DEBUG
 
         auto start = std::chrono::high_resolution_clock::now();
 		for (char iTest = 0; iTest < nTest; iTest++) {
-			std::vector<long> result = naiveSearch(text, pattern);
-            //for (long i : result) std::cout << "FOUND: " << i << std::endl;
+			std::vector<long> result = kmpSearch(text, pattern);
+            //for (long i : result) std::cout << "FOUND: " << i << std::endl; // DEBUG
 		}
+        //std::cout << "------------" << std::endl; //DEBUG
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds> (end - start);
         std::cout << duration.count() / nTest << std::endl;
@@ -54,17 +55,18 @@ int main(void)
 		
 		
 		std::string text = getText(sizeText, firstSymbol_ANSI, sigma);
-		//std::cout << text << std::endl;
+		//std::cout << "TEXT: "<< text << std::endl; //DEBUG
         long shift = rand() % (sizeText - nPattern + 1);
-        //std::cout << shift << std::endl;
+        //std::cout << shift << std::endl; //DEBUG
         std::string pattern = text.substr(shift, nPattern);
-        //std::cout << pattern << std::endl;
-
+        //std::cout << "PATTERN: " << pattern << std::endl; //DEBUG
+        //std::cout << "FOUND: " << std::endl; //DEBUG
         auto start = std::chrono::high_resolution_clock::now();
 		for (char iTest = 0; iTest < nTest; iTest++) {
-			std::vector<long> result = naiveSearch(text, pattern);
+			std::vector<long> result = kmpSearch(text, pattern);
             //for (long i : result) std::cout << i << std::endl;
 		}
+        //std::cout << "------------" << std::endl; //DEBUG
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds> (end - start);
         std::cout << duration.count() / nTest << std::endl;
